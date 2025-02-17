@@ -15,10 +15,23 @@ namespace Assignment9.DB_Services
 
         public DatabaseServices(string dbPath)
         {
-            _database = new SQLiteAsyncConnection(dbPath);
-            _database.CreateTableAsync<Profile>().Wait();
-            _database.CreateTableAsync<ShoppingItem>().Wait();
-            _database.CreateTableAsync<ShoppingCart>().Wait();
+            try
+            {
+                _database = new SQLiteAsyncConnection(dbPath);
+                // Add logging to confirm dbPath
+                Console.WriteLine($"Database path: {dbPath}");
+
+                // Create tables
+                _database.CreateTableAsync<Profile>().Wait();
+                _database.CreateTableAsync<ShoppingItem>().Wait();
+                _database.CreateTableAsync<ShoppingCart>().Wait();
+            }
+            catch (Exception ex)
+            {
+                // Handle and log the exception
+                Console.WriteLine($"Database initialization error: {ex.Message}");
+                throw;
+            }
         }
 
         // Profile Methods

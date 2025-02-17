@@ -4,10 +4,16 @@
              x:Class="Assignment9.Views.ProfilePage"
              Title="ProfilePage">
     <StackLayout Padding="20">
+        <Image x:Name="ProfileImage" HeightRequest="150" WidthRequest="150" 
+               Aspect="AspectFill" BackgroundColor="LightGray" />
+        <Button Text="Upload Profile Picture" Clicked="OnUploadImageClicked" />
         <Entry x:Name="nameEntry" Placeholder="Name"/>
         <Entry x:Name="surnameEntry" Placeholder="Surname"/>
         <Entry x:Name="emailEntry" Placeholder="Email"/>
         <Editor x:Name="bioEditor" Placeholder="Bio"/>
         <Button Text="Save Profile" Clicked="OnSaveProfileClicked"/>
+        <Button Text="Go to Shopping List" Clicked="OnGoToShoppingListClicked" />
     </StackLayout>
+    
+    
 </ContentPage>

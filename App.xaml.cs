@@ -10,7 +10,7 @@ namespace Assignment9
         {
             InitializeComponent();
             Database = new DatabaseServices(dbPath);
-            MainPage = new NavigationPage(new ShoppingListPage()); // Landing Page
+            MainPage = new AppShell(); 
         }
     }
 }

@@ -35,4 +35,11 @@ public partial class ProfilePage : ContentPage
         await App.Database.SaveProfileAsync(profile);
         await DisplayAlert("Success", "Profile saved!", "OK");
     }
-}
+
+    private async void OnGoToShoppingListClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("ShoppingListPage");
+    }
+
+
+}   

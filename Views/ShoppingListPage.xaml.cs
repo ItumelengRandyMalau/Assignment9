@@ -3,17 +3,22 @@ namespace Assignment9.Views;
 
 public partial class ShoppingListPage : ContentPage
 {
-	public ShoppingListPage()
-	{
-		InitializeComponent();
-        LoadShoppingItems();
+    public ShoppingListPage()
+    {
+        InitializeComponent();
     }
 
-    private async void LoadShoppingItems()
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await LoadShoppingItems();
+    }
+
+    private async Task LoadShoppingItems()
     {
         shoppingListView.ItemsSource = await App.Database.GetShoppingItemsAsync();
     }
-    // ? FIX: Add the missing OnItemSelected method
+
     private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         if (e.SelectedItem is ShoppingItem)
@@ -21,7 +26,7 @@ public partial class ShoppingListPage : ContentPage
             var profile = await App.Database.GetProfileAsync();
             if (profile != null)
             {
-                await Navigation.PushAsync(new ShoppingCartPage(profile.Id)); // ? Pass profileId
+                await Navigation.PushAsync(new ShoppingCartPage(profile.Id)); // Pass profileId
             }
             else
             {
@@ -30,7 +35,10 @@ public partial class ShoppingListPage : ContentPage
         }
     }
 
-
+    private async void OnGoToShoppingCartClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("ShoppingCartPage");
+    }
 
     private async void OnAddToCartClicked(object sender, EventArgs e)
     {
